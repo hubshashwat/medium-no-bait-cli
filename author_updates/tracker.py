@@ -47,7 +47,7 @@ class UpdatesTracker:
 
 if __name__ == "__main__":
     # Test
-    tracker = AuthorTracker(["@intellizab", "curiosai"])
+    tracker = UpdatesTracker(["@intellizab", "curiosai"])
     limit = datetime(2026, 2, 20)
     print(f"Checking updates after {limit.date()}...")
     updates = tracker.get_updates_after(limit)
