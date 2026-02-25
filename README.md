@@ -1,4 +1,4 @@
-# Medium No-Bait CLI 🚀
+# Medium No-Bait CLI
 
 A high-performance, terminal-based Medium reader designed for developers who value signal over noise. Track your favorite authors and publications, and catch the most relevant stories without the "clap-bait" and social distractions.
 
@@ -13,6 +13,13 @@ On Medium, the home feed is an algorithm designed to keep you scrolling. **Mediu
 ## Quick Start
 
 ### Installation
+
+**Option 1: Install from PyPI (Recommended)**
+```bash
+pip install medium-no-bait-cli
+```
+
+**Option 2: Local development installation**
 1. Clone the repository:
    ```bash
    git clone https://github.com/hubshashwat/medium-no-bait-cli.git
