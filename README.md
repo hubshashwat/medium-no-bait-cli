@@ -1,57 +1,45 @@
-# Medium Terminal Suite 🚀
+# Medium No-Bait CLI 🚀
 
-A high-performance, terminal-based Medium reader designed for developers who value signal over noise. Track your favorite authors and publications, and catch the most relevant stories using custom keyword filters.
+A high-performance, terminal-based Medium reader designed for developers who value signal over noise. Track your favorite authors and publications, and catch the most relevant stories without the "clap-bait" and social distractions.
 
-## Features
+## Why it exists?
+On Medium, the home feed is an algorithm designed to keep you scrolling. **Medium No-Bait CLI** gives you a strictly curated, high-signal experience that only shows you what YOU chose to follow.
 
-- **Personalized Dashboards**: See updates from exactly who you follow.
-- **Keyword Hits**: A dedicated high-signal feed that filters stories by your interests (e.g., AI, Python, Rust).
-- **RSS-Powered**: Lightning-fast update checks using official Medium RSS feeds.
-- **Terminal Optimization**: Beautiful, non-truncating link display for seamless reading on your browser.
-- **Persistence**: Tracks your last access date for every source automatically.
+- **Zero Distractions**: No ads, no claps, no social pressure.
+- **Keyword Hits**: Catch the most relevant stories using custom filters (e.g., AI, Python).
+- **RSS-Powered**: Lightning-fast update checks.
+- **Terminal First**: Clean, full links that are 100% clickable for your browser.
 
 ## Quick Start
-
-### Prerequisites
-- Python 3.8+
-- A terminal (PowerShell, bash, or CMD)
 
 ### Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/best-medium-reader.git
-   cd best-medium-reader
+   git clone https://github.com/hubshashwat/medium-no-bait-cli.git
+   cd medium-no-bait-cli
    ```
 
-2. Create and activate a virtual environment:
+2. Install the package locally:
    ```bash
-   python -m venv venv
-   # On Windows:
-   .\venv\Scripts\activate
-   # On Unix:
-   source venv/bin/activate
-   ```
-
-3. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
+   pip install -e .
    ```
 
 ### Running the App
+Once installed, you can simply type:
 ```bash
-python main.py
+mnb
 ```
 
 ## How It Works
 
-1. **Manage Favorites**: Add authors (use `@username`) and publications (use the pub name from the URL, e.g., `the-startup`) in the Manage menu.
+1. **Manage Favorites**: Add authors (use `@username`) and publications (use the pub name from the URL, e.g., `the-startup`).
 2. **Setup Keywords**: Add specific keywords you want to track across your favorites.
-3. **Enjoy Signal**: Use the **Keyword Hits** view to see exactly what you care about, or the **Full Feed** to browse everything new.
+3. **Enjoy Signal**: Use the **Keyword Hits** view to see exactly what you care about.
 
 ## Project Structure
-- `main.py`: The central terminal interface.
-- `author_updates/`: Logic for tracking and filtering updates.
-- `shared/`: Shared models, storage utilities, and the RSS scraper.
+- `src/medium_no_bait/main.py`: The central terminal interface.
+- `src/medium_no_bait/author_updates/`: Logic for tracking and filtering updates.
+- `src/medium_no_bait/shared/`: Shared tools (RSS Scraper, Storage).
 
 ---
 Built with 💙 for the Medium developer community.

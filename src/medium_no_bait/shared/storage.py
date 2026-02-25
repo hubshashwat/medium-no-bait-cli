@@ -5,9 +5,11 @@ from typing import Dict, List, Optional
 
 class Storage:
     def __init__(self, filename: str = "favorites.json"):
-        # Put it in the root of the project
-        root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        self.filepath = os.path.join(root_dir, filename)
+        # Put it in a persistent user directory
+        config_dir = os.path.expanduser("~/.medium_no_bait")
+        if not os.path.exists(config_dir):
+            os.makedirs(config_dir)
+        self.filepath = os.path.join(config_dir, filename)
         self.data = self._load()
 
     def _load(self) -> Dict:
@@ -42,7 +44,8 @@ class Storage:
     def add_author(self, author: str):
         author = author.lstrip("@")
         if author not in self.data["authors"]:
-            self.data["authors"][author] = datetime(2026, 2, 1).isoformat()
+            from datetime import timedelta
+            self.data["authors"][author] = (datetime.now() - timedelta(days=7)).isoformat()
             self.save()
 
     def remove_author(self, author: str):
@@ -57,7 +60,8 @@ class Storage:
 
     def add_publication(self, pub: str):
         if pub not in self.data["publications"]:
-            self.data["publications"][pub] = datetime(2026, 2, 1).isoformat()
+            from datetime import timedelta
+            self.data["publications"][pub] = (datetime.now() - timedelta(days=7)).isoformat()
             self.save()
 
     def remove_publication(self, pub: str):

@@ -3,11 +3,8 @@ import os
 from datetime import datetime
 from typing import List
 
-# Add parent to path to import shared models
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-from shared.scraper import MediumScraper
-from shared.models import Article
+from ..shared.scraper import MediumScraper
+from ..shared.models import Article
 
 class UpdatesTracker:
     def __init__(self, targets: List[str], target_type: str = "authors"):

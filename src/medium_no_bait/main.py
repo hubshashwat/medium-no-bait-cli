@@ -11,9 +11,9 @@ from rich.text import Text
 # Ensure shared and feature folders are in path
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-from author_updates.tracker import UpdatesTracker
-from shared.models import Article
-from shared.storage import Storage
+from .author_updates.tracker import UpdatesTracker
+from .shared.models import Article
+from .shared.storage import Storage
 
 console = Console()
 storage = Storage()
@@ -21,8 +21,8 @@ storage = Storage()
 def show_home():
     console.clear()
     console.print(Panel.fit(
-        "[bold cyan]Medium Terminal Suite[/bold cyan]\n"
-        "[white]Your personalized terminal-based reader[/white]",
+        "[bold cyan]Medium No-Bait CLI[/bold cyan]\n"
+        "[white]Your distraction-free terminal reader[/white]",
         box=box.DOUBLE,
         border_style="bright_blue"
     ))
@@ -156,6 +156,13 @@ def handle_updates(apply_keywords=False):
     title_text = "Keyword Hits" if apply_keywords else "Full Updates Feed"
     console.print(Panel(f"[bold green]{title_text}[/bold green]", border_style="green"))
     
+    # Refine the prompt to be clearer about "specific" categories
+    source_choice = Prompt.ask(
+        f"Which sources to check for {title_text}?", 
+        choices=["all", "authors", "pubs"], 
+        default="all"
+    )
+    
     use_last = Prompt.ask("Check since last visit?", choices=["y", "n"], default="y")
     fetch_limit = IntPrompt.ask("History depth (1-10 stories per source)", default=5)
     fetch_limit = max(1, min(10, fetch_limit))
@@ -174,16 +181,18 @@ def handle_updates(apply_keywords=False):
     
     with console.status("[bold green]Fetching new stories..."):
         # Authors
-        for auth in authors:
-            l_date = limit_date or storage.get_last_access(auth, type="authors") or datetime(2026, 1, 1)
-            tracker = UpdatesTracker([auth], target_type="authors")
-            all_updates.extend(tracker.get_updates_after(l_date, update_timestamp=True, limit=fetch_limit, keywords=keywords))
+        if source_choice in ["all", "authors"]:
+            for auth in authors:
+                l_date = limit_date or storage.get_last_access(auth, type="authors") or datetime(2026, 1, 1)
+                tracker = UpdatesTracker([auth], target_type="authors")
+                all_updates.extend(tracker.get_updates_after(l_date, update_timestamp=True, limit=fetch_limit, keywords=keywords))
         
         # Publications
-        for pub in pubs:
-            l_date = limit_date or storage.get_last_access(pub, type="publications") or datetime(2026, 1, 1)
-            tracker = UpdatesTracker([pub], target_type="publications")
-            all_updates.extend(tracker.get_updates_after(l_date, update_timestamp=True, limit=fetch_limit, keywords=keywords))
+        if source_choice in ["all", "pubs"]:
+            for pub in pubs:
+                l_date = limit_date or storage.get_last_access(pub, type="publications") or datetime(2026, 1, 1)
+                tracker = UpdatesTracker([pub], target_type="publications")
+                all_updates.extend(tracker.get_updates_after(l_date, update_timestamp=True, limit=fetch_limit, keywords=keywords))
 
     if not all_updates:
         console.print(f"\n[yellow]No new stories found matching your {('keyword ' if apply_keywords else '')}criteria.[/yellow]")
