@@ -14,7 +14,7 @@ class UpdatesTracker:
 
     def get_updates_after(self, date_limit: datetime, update_timestamp: bool = False, limit: int = 10, keywords: List[str] = None) -> List[Article]:
         all_updates = []
-        from shared.storage import Storage
+        from ..shared.storage import Storage
         storage = Storage()
 
         for target in self.targets:
@@ -29,7 +29,8 @@ class UpdatesTracker:
             if keywords:
                 filtered_updates = []
                 for art in updates:
-                    content_to_check = (art.title + " " + getattr(art, "summary", "")).lower()
+                    # Check title and tags for keywords
+                    content_to_check = (art.title + " " + " ".join(art.tags)).lower()
                     if any(kw.lower() in content_to_check for kw in keywords):
                         filtered_updates.append(art)
                 updates = filtered_updates

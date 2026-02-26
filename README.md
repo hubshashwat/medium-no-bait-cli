@@ -6,8 +6,9 @@ A high-performance, terminal-based Medium reader designed for developers who val
 On Medium, the home feed is an algorithm designed to keep you scrolling. **Medium No-Bait CLI** gives you a strictly curated, high-signal experience that only shows you what YOU chose to follow.
 
 - **Zero Distractions**: No ads, no claps, no social pressure.
-- **Keyword Hits**: Catch the most relevant stories using custom filters (e.g., AI, Python).
+- **Keyword Hits**: Catch the most relevant stories using custom filters that scan **Titles** and **Tags**.
 - **RSS-Powered**: Lightning-fast update checks.
+- **Premium Detection**: Clear `[Member Only]` labels for paywalled content.
 - **Terminal First**: Clean, full links that are 100% clickable for your browser.
 
 ## Quick Start

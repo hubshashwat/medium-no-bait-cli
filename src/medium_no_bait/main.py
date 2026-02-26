@@ -205,7 +205,8 @@ def handle_updates(apply_keywords=False):
 
     for idx, art in enumerate(all_updates, 1):
         # Header line: Date | Source | Title
-        header = f"[blue]{art.pub_date.strftime('%b %d')}[/blue] | [green]{art.author[:15]}[/green] | [white bold]{art.title}[/white bold]"
+        premium_label = "[bold yellow][Member Only][/bold yellow] " if art.is_premium else ""
+        header = f"[blue]{art.pub_date.strftime('%b %d')}[/blue] | [green]{art.author[:15]}[/green] | {premium_label}[white bold]{art.title}[/white bold]"
         
         # Link line: Printed clearly for terminal clickability
         link_line = f"[cyan underline]{art.link}[/cyan underline]"

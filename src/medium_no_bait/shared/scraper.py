@@ -2,7 +2,7 @@ import requests
 from datetime import datetime
 from typing import List
 import xml.etree.ElementTree as ET
-from shared.models import Article
+from .models import Article
 
 class MediumScraper:
     AUTHOR_RSS_TEMPLATE = "https://medium.com/feed/@{author}"
@@ -36,11 +36,21 @@ class MediumScraper:
                 link_elem = item.find("link")
                 if title_elem is None or link_elem is None: continue
                 
+                # Namespaces for Medium-specific metadata
+                ns = {'content': 'http://purl.org/rss/1.0/modules/content/', 'dc': 'http://purl.org/dc/elements/1.1/'}
+                
                 title = title_elem.text
                 link = link_elem.text
                 
-                author_elem = item.find("{http://purl.org/dc/elements/1.1/}creator")
+                author_elem = item.find("dc:creator", ns)
                 author_name = author_elem.text if author_elem is not None else "Unknown"
+                
+                # 1. Tags (Author-defined categories)
+                tags = [cat.text for cat in item.findall("category")]
+                
+                # 2. Premium Detection (Missing <content:encoded> in Premium RSS items)
+                content_elem = item.find("content:encoded", ns)
+                is_premium = content_elem is None
                 
                 pub_date_str = item.find("pubDate").text
                 try:
@@ -52,7 +62,9 @@ class MediumScraper:
                     title=title,
                     link=link,
                     author=author_name,
-                    pub_date=pub_date
+                    pub_date=pub_date,
+                    tags=tags,
+                    is_premium=is_premium
                 ))
             return articles
         except Exception:
