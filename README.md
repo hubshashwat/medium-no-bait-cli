@@ -1,5 +1,7 @@
 # Medium No-Bait CLI
 
+![CLI Screenshot](image.png)
+
 A high-performance, terminal-based Medium reader designed for developers who value signal over noise. Track your favorite authors and publications, and catch the most relevant stories without the "clap-bait" and social distractions.
 
 ## Why it exists?
