@@ -2,7 +2,7 @@
 
 ![CLI Screenshot](image.png)
 
-A high-performance, terminal-based Medium reader designed for developers who value signal over noise. Track your favorite authors and publications, and catch the most relevant stories without the "clap-bait" and social distractions.
+A high-performance, terminal-based Medium aggregator designed for developers who value signal over noise. Track your favorite authors and publications, and catch the most relevant stories without the "clap-bait" and social distractions.
 
 ## Why it exists?
 On Medium, the home feed is an algorithm designed to keep you scrolling. **Medium No-Bait CLI** gives you a strictly curated, high-signal experience that only shows you what YOU chose to follow.
